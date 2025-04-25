@@ -1,13 +1,6 @@
-<# ======================== CONSOLE QR CODE GENERATOR ==================================
- 
-SYNOPSIS
-Generates QR codes using goqr.me API and displays them in the console.
-
-USAGE
-1. Run script
-2. Enter text or URL to generate
-3. Choose display options
-#>
+# Versión modificada sin comentario multilínea
+# CONSOLE QR CODE GENERATOR
+# Generates QR codes using goqr.me API and displays them in console
 
 # User input
 $URL = Read-Host "Enter text or URL to encode in QR code"
