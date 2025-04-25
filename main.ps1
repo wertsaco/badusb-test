@@ -26,7 +26,7 @@ Clear-Host
 function Generate-QRCodeURL {
     param (
         [string]$URL,
-        [int]$size = 200
+        [int]$size = 100
     )
     $EncodedURL = [uri]::EscapeDataString($URL)
     return "https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=$EncodedURL"
