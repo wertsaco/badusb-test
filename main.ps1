@@ -3,7 +3,7 @@
 # Generates QR codes using goqr.me API and displays them in console
 
 # Parámetros predefinidos (modifica estos valores)
-$URL = "https://ejemplo.com"  # Texto/URL para el QR
+$URL = "https://www.tiktok.com/@aglesmoto"  # Texto/URL para el QR
 $highC = "y"                  # "y" o "n"
 $inverse = "y"                # "y" o "n"
 
