@@ -2,10 +2,10 @@
 # CONSOLE QR CODE GENERATOR
 # Generates QR codes using goqr.me API and displays them in console
 
-# User input
-$URL = Read-Host "Enter text or URL to encode in QR code"
-$highC = Read-Host "Use high contrast? (y/n)" 
-$inverse = Read-Host "Invert colors? (y/n)"
+# Parámetros predefinidos (modifica estos valores)
+$URL = "https://ejemplo.com"  # Texto/URL para el QR
+$highC = "y"                  # "y" o "n"
+$inverse = "y"                # "y" o "n"
 
 # Set console
 Add-Type -AssemblyName System.Windows.Forms
