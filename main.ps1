@@ -81,4 +81,8 @@ for ($y = 0; $y -lt $Bitmap.Height; $y += 2) {
 $QRCodeImage.Dispose()
 Remove-Item -Path $QRCodeImageFile -Force -ErrorAction SilentlyContinue
 
-Pause
+# Reemplaza el "Pause" original con esto:
+Write-Host "`nEscribe 'el nombre del canal' para cerrar" -ForegroundColor Cyan
+do {
+    $input = Read-Host " "
+} while ($input -ne "el nombre del canal")
