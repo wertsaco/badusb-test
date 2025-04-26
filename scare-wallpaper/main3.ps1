@@ -1,6 +1,6 @@
 # Configuración inicial
 $url = "https://i.ibb.co/XJSPt9s/1.png"
-$randomName = "wallpaper_" + (Get-Date -Format "yyyyMMddHHmmss") + (Get-Random -Minimum 1000 -Maximum 9999)
+$randomName = "wallpaper_" + (Get-Date -Format "yyyyMMddHHmmss")
 $outputPath = "$env:temp\$randomName.png"  # Primero descargamos como PNG
 
 # Descargar la imagen
@@ -13,18 +13,18 @@ try {
 }
 
 # Convertir a BMP para mejor compatibilidad
-Add-Type -AssemblyName System.Drawing
-try {
-    $image = [System.Drawing.Image]::FromFile($outputPath)
-    $bmpPath = [System.IO.Path]::ChangeExtension($outputPath, ".bmp")
-    $image.Save($bmpPath, [System.Drawing.Imaging.ImageFormat]::Bmp)
-    $image.Dispose()
-    Remove-Item $outputPath -Force -ErrorAction SilentlyContinue
-    $outputPath = $bmpPath
-    Write-Host "Imagen convertida a BMP: $outputPath" -ForegroundColor Cyan
-} catch {
-    Write-Warning "No se pudo convertir la imagen a BMP, se usará el formato original"
-}
+##Add-Type -AssemblyName System.Drawing
+##try {
+    #$image = [System.Drawing.Image]::FromFile($outputPath)
+    #$bmpPath = [System.IO.Path]::ChangeExtension($outputPath, ".bmp")
+    #$image.Save($bmpPath, [System.Drawing.Imaging.ImageFormat]::Bmp)
+    #$image.Dispose()
+    #Remove-Item $outputPath -Force -ErrorAction SilentlyContinue
+    #$outputPath = $bmpPath
+    #Write-Host "Imagen convertida a BMP: $outputPath" -ForegroundColor Cyan
+#} catch {
+    #Write-Warning "No se pudo convertir la imagen a BMP, se usará el formato original"
+#}
 
 # Cambiar el wallpaper
 $signature = @'
@@ -61,11 +61,11 @@ try {
 }
 
 # Limpieza opcional (comentar si quieres conservar la imagen)
-try {
-    Remove-Item $outputPath -Force -ErrorAction SilentlyContinue
-} catch {
-    Write-Warning "No se pudo eliminar el archivo temporal: $outputPath"
-}
+#try {
+    #Remove-Item $outputPath -Force -ErrorAction SilentlyContinue
+#} catch {
+    #Write-Warning "No se pudo eliminar el archivo temporal: $outputPath"
+#}
 
 # Mantener el script abierto para ver errores
 Write-Host "`nOperación completada. Presiona Enter para salir..." -ForegroundColor Yellow
