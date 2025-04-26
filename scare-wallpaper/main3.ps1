@@ -26,25 +26,49 @@ try {
     #Write-Warning "No se pudo convertir la imagen a BMP, se usará el formato original"
 #}
 
-# Cambiar el wallpaper
-$signature = @'
-using System;
-using System.Runtime.InteropServices;
-using Microsoft.Win32;
-
-public class Wallpaper {
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
+#Cambiar el wallpaper mejorado
+try {
+    Add-Type -TypeDefinition $wallpaperCode -ErrorAction Stop
+    Write-Host "Configurando nuevo wallpaper..." -ForegroundColor Yellow
     
-    public static void SetWallpaper(string path) {
-        SystemParametersInfo(0x0014, 0, path, 0x01 | 0x02);
-        // Actualizar también en el registro
-        RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true);
-        key.SetValue(@"WallpaperStyle", "2");  # 2 = Stretched
-        key.SetValue(@"TileWallpaper", "0");
-        key.Close();
-    }
+    # Actualizar registro primero
+    Set-ItemProperty -Path 'HKCU:\Control Panel\Desktop' -Name Wallpaper -Value $outputPath
+    Set-ItemProperty -Path 'HKCU:\Control Panel\Desktop' -Name WallpaperStyle -Value 2
+    Set-ItemProperty -Path 'HKCU:\Control Panel\Desktop' -Name TileWallpaper -Value 0
+    
+    # Aplicar cambios
+    [Wallpaper]::Set($outputPath)
+    Start-Sleep -Seconds 1
+    
+    # Forzar actualización
+    rundll32.exe user32.dll, UpdatePerUserSystemParameters
+    Start-Sleep -Seconds 1
+    
+    Write-Host "¡Wallpaper cambiado con éxito!" -ForegroundColor Green
+} catch {
+    Write-Error "ERROR AL CAMBIAR WALLPAPER: $_"
+    exit 1
 }
+
+# Cambiar el wallpaper old
+#$signature = @'
+#using System;
+#using System.Runtime.InteropServices;
+#using Microsoft.Win32;
+
+#public class Wallpaper {
+    #[DllImport("user32.dll", CharSet = CharSet.Auto)]
+    #public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
+    
+    #public static void SetWallpaper(string path) {
+       # SystemParametersInfo(0x0014, 0, path, 0x01 | 0x02);
+        #// Actualizar también en el registro
+       # RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true);
+      #  key.SetValue(@"WallpaperStyle", "2");  # 2 = Stretched
+      #  key.SetValue(@"TileWallpaper", "0");
+      #  key.Close();
+   # }
+#}
 '@
 
 try {
