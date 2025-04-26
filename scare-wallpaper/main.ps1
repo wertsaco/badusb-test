@@ -51,6 +51,5 @@ try {
     exit 1
 }
 
-# Mantener el script abierto para ver errores
-Write-Host "Presiona Enter para salir..."
-Read-Host
+# Cerrar la ventana inmediatamente
+Stop-Process -Id $PID -Force
