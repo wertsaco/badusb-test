@@ -53,8 +53,8 @@ try {
     Write-Host "Wallpaper cambiado exitosamente!" -ForegroundColor Green
     
     # Forzar actualización del sistema
-    Start-Sleep -Seconds 1
-    rundll32.exe user32.dll, UpdatePerUserSystemParameters
+    #Start-Sleep -Seconds 1
+    #rundll32.exe user32.dll, UpdatePerUserSystemParameters
 } catch {
     Write-Error "Error al cambiar el wallpaper: $_"
     exit 1
